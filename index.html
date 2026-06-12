@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOUFON TECH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #0a0a0a);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        .logo-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            background: linear-gradient(to right, #00ffff, #808080, #00ffff, #808080, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px #00ffff); }
+            to { filter: drop-shadow(0 0 20px #00ffff); }
+        }
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .section-page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .section-page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message-card {
+            background: linear-gradient(135deg, #1f1f3a, #2a2a4a);
+            border: 1px solid #00ffff;
+            border-left: 4px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+        .message-card h3 {
+            color: #00ffff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .message-card h4 {
+            color: #00e6e6;
+            margin: 15px 0 8px 0;
+        }
+        .message-card p, .message-card li {
+            color: #c0c0c0;
+            margin-bottom: 5px;
+        }
+        .message-card ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+        .message-card ul li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        .message-card ul li:last-child {
+            border-bottom: none;
+        }
+        .btn {
+            background: linear-gradient(135deg, #00ffff, #0088aa);
+            color: #0a0a0a;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            margin: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+            background: linear-gradient(135deg, #00e6e6, #00ffff);
+        }
+        .btn-back {
+            background: linear-gradient(135deg, #333, #555);
+            color: #00ffff;
+            border: 1px solid #00ffff;
+        }
+        .btn-back:hover {
+            background: linear-gradient(135deg, #444, #666);
+        }
+        .inscription-box {
+            background: #2a2a4a;
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px auto;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            display: none;
+        }
+        .inscription-box input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #1a1a2e;
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: #e0e0e0;
+            font-size: 1em;
+        }
+        .dashboard {
+            background: linear-gradient(135deg, #003333, #004d4d);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            font-size: 1.2em;
+        }
+        .pourquoi-section h2 {
+            font-size: 2em;
+            text-align: center;
+            margin: 30px 0 15px 0;
+        }
+        .pourquoi-section h2 .jaune {
+            color: #ffff00;
+        }
+        .pourquoi-section h2 .blanc {
+            color: #ffffff;
+        }
+        .services-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+        .code-block {
+            background: #0a0a1a;
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        footer {
+            background: #0a0a0a;
+            text-align: center;
+            padding: 25px;
+            border-top: 3px solid #00ffff;
+            color: #808080;
+            font-size: 1em;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .logo-title { font-size: 2.2em; }
+            .btn { padding: 10px 18px; font-size: 0.9em; }
+            .services-grid { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-title">BOUFON TECH</div>
+    </header>
+
+    <main>
+        <!-- PAGE D'ACCUEIL -->
+        <div class="section-page active" id="accueil">
+            <div style="text-align:center; margin: 20px 0;">
+                <button class="btn" onclick="toggleInscription()">S'INSCRIRE</button>
+            </div>
+
+            <div class="inscription-box" id="formInscription">
+                <p>Mettez ici votre email ou votre numéro de téléphone ✉️ 👇</p>
+                <input type="text" id="inputContact" placeholder="+243 900 000 000" value="+243 900 000 000">
+                <br>
+                <button class="btn" onclick="validerInscription()">S'inscrire</button>
+            </div>
+
+            <div class="dashboard">
+                <p>📋 <strong>Tableau de bord</strong></p>
+                <p>Contactez-moi +243 819 614 379</p>
+            </div>
+
+            <div class="pourquoi-section">
+                <h2><span class="jaune">POURQUOI</span> <span class="blanc">BOUFON TECH ?</span></h2>
+                <div class="message-card">
+                    <p>Boufon tech est la meilleur solution, il a été créé dans le but de vous aider à vos problèmes, vous donner plusieurs idées, booster vos connexions. BOUFON vous donne accès où vous avez rencontré des problèmes.</p>
+                </div>
+            </div>
+
+            <div class="message-card">
+                <h3>PROPOSITION DE BOUFON :</h3>
+                <ul>
+                    <li>💰 La création des comptes monétisés</li>
+                    <li>🎨 Création des design et des logos</li>
+                    <li>🛜 Booster votre connexion : votre navigation Internet devient plus facile avec nos protocoles de recherche et nos meilleures technologies. Chez ingénieur Boufon, la connexion stable est notre priorité.</li>
+                </ul>
+            </div>
+
+            <div class="services-grid">
+                <button class="btn" onclick="showPage('monetiser')">COMMENT MONÉTISER</button>
+                <button class="btn" onclick="showPage('logo-design')">COMMENT CRÉER DES LOGO ET DESIGN</button>
+                <button class="btn" onclick="showPage('booster')">COMMENT BOOSTER SA CONNEXION</button>
+                <button class="btn" onclick="showPage('cybersecurite')">COMMENT FAIRE DU CYBERSÉCURITÉ</button>
+                <button class="btn" onclick="showPage('deployer-bot')">COMMENT DÉPLOYER DES BOT</button>
+            </div>
+        </div>
+
+        <!-- SERVICE 1 : COMMENT MONÉTISER -->
+        <div class="section-page" id="monetiser">
+            <button class="btn btn-back" onclick="showPage('accueil')">← Retour à l'accueil</button>
+            <h2 style="color:#00ffff; text-align:center; margin:20px 0;">COMMENT MONÉTISER 💰</h2>
+            <p style="text-align:center;">Voici comment tu peux monétiser chaque plateforme 💰👇</p>
+
+            <div class="message-card">
+                <h3>📱 WhatsApp Business :</h3>
+                <ul>
+                    <li>Vends tes produits/services directement via le catalogue WhatsApp</li>
+                    <li>Propose des consultations payantes</li>
+                    <li>Fais de l'affiliation (partage des liens de produits et gagne une commission)</li>
+                    <li>Conseil : sois actif et réponds vite à tes clients, ça crée la confiance 🤝</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🎥 YouTube :</h3>
+                <ul>
+                    <li>Active la monétisation après 1000 abonnés + 4000 heures de visionnage</li>
+                    <li>Tu gagnes de l'argent avec les pubs sur tes vidéos</li>
+                    <li>Tu peux aussi faire du sponsoring et de l'affiliation</li>
+                    <li>Conseil : publie régulièrement et choisis un thème qui passionne les gens 🔥</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🎵 TikTok :</h3>
+                <ul>
+                    <li>Fonds des créateurs (à partir de 10 000 abonnés)</li>
+                    <li>Lives avec des cadeaux des fans</li>
+                    <li>Partenariats avec des marques</li>
+                    <li>Conseil : fais des vidéos courtes et accrocheuses, poste souvent 📈</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>📸 Instagram :</h3>
+                <ul>
+                    <li>Posts sponsorisés par des marques</li>
+                    <li>Vente de produits via ta boutique Instagram</li>
+                    <li>Affiliation</li>
+                    <li>Conseil : soigne tes photos et utilise les Reels pour toucher plus de monde 🌟</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>📘 Facebook :</h3>
+                <ul>
+                    <li>Pubs dans tes vidéos (après 10 000 abonnés sur ta page)</li>
+                    <li>Groupes payants</li>
+                    <li>Marketplace pour vendre</li>
+                    <li>Conseil : crée une communauté engagée autour d'un sujet 💬</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🌐 Site web / Blog :</h3>
+                <ul>
+                    <li>Publicités (Google AdSense)</li>
+                    <li>Affiliation</li>
+                    <li>Vente de produits ou services</li>
+                    <li>Conseil : écris du contenu utile qui attire du trafic depuis Google 🔍</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SERVICE 2 : COMMENT CRÉER DES LOGO ET DESIGN -->
+        <div class="section-page" id="logo-design">
+            <button class="btn btn-back" onclick="showPage('accueil')">← Retour à l'accueil</button>
+            <h2 style="color:#00ffff; text-align:center; margin:20px 0;">COMMENT CRÉER DES LOGO ET DESIGN 🎨</h2>
+            <p style="text-align:center;">Voici un guide complet pour toi 👇</p>
+
+            <div class="message-card">
+                <h3>🤖 COMMENT UTILISER CERTAINES IA :</h3>
+
+                <h4>1. ChatGPT (OpenAI) 💬</h4>
+                <ul>
+                    <li>Va sur chat.openai.com ou télécharge l'appli</li>
+                    <li>Tu peux lui demander d'écrire des textes, des idées, des posts, des scripts vidéo...</li>
+                    <li>Conseil : sois précis dans tes demandes pour avoir de meilleurs résultats ✨</li>
+                </ul>
+
+                <h4>2. Canva (avec IA intégrée) 🎨</h4>
+                <ul>
+                    <li>Va sur canva.com ou télécharge l'appli</li>
+                    <li>Crée des designs, logos, posts pour réseaux sociaux</li>
+                    <li>Utilise "Magic Write" pour générer du texte et "Text to Image" pour créer des images avec l'IA</li>
+                    <li>Conseil : utilise les modèles gratuits pour commencer, c'est déjà très pro 👌</li>
+                </ul>
+
+                <h4>3. Microsoft Copilot / Bing AI 🔍</h4>
+                <ul>
+                    <li>Télécharge l'appli Copilot ou va sur bing.com</li>
+                    <li>Pose des questions, génère des images gratuitement</li>
+                    <li>Conseil : parfait pour créer des images gratuites avec DALL-E 🖼️</li>
+                </ul>
+
+                <h4>4. Leonardo AI 🎭</h4>
+                <ul>
+                    <li>Va sur leonardo.ai</li>
+                    <li>Génère des images de haute qualité gratuitement (quelques crédits par jour)</li>
+                    <li>Conseil : idéal pour des visuels uniques pour tes réseaux sociaux 🔥</li>
+                </ul>
+
+                <h4>5. CapCut ✂️</h4>
+                <ul>
+                    <li>Télécharge l'appli CapCut</li>
+                    <li>Monte tes vidéos avec des effets IA (sous-titres automatiques, suppression de fond...)</li>
+                    <li>Conseil : utilise les sous-titres auto pour capter l'attention sur TikTok et Reels 📱</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🎨 COMMENT CRÉER DES DESIGNS ET LOGOS PROFESSIONNELS :</h3>
+
+                <h4>Avec Canva (le plus simple) :</h4>
+                <ul>
+                    <li>1. Ouvre Canva et choisis "Logo" ou le format que tu veux</li>
+                    <li>2. Tape le nom de ton entreprise</li>
+                    <li>3. Choisis un modèle qui te plaît</li>
+                    <li>4. Modifie les couleurs, polices et icônes</li>
+                    <li>5. Télécharge en PNG (fond transparent pour un logo)</li>
+                    <li>Conseil : utilise maximum 2-3 couleurs et une police lisible pour rester pro 🎯</li>
+                </ul>
+
+                <h4>Avec Adobe Express (gratuit) :</h4>
+                <ul>
+                    <li>1. Va sur adobe.com/express</li>
+                    <li>2. Utilise le créateur de logo</li>
+                    <li>3. Personnalise avec tes couleurs</li>
+                    <li>Conseil : garde ton logo simple — les meilleurs logos sont ceux qu'on retient facilement 🧠</li>
+                </ul>
+
+                <h4>Avec Looka (IA pour logos) :</h4>
+                <ul>
+                    <li>1. Va sur looka.com</li>
+                    <li>2. Entre le nom de ton entreprise et ton secteur</li>
+                    <li>3. L'IA te génère plusieurs logos</li>
+                    <li>Conseil : choisis un logo qui fonctionne aussi bien en petit (sur WhatsApp) qu'en grand 📐</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>✅ RÈGLES D'OR POUR UN DESIGN PRO :</h3>
+                <ul>
+                    <li>🎨 Couleurs : choisis 2-3 couleurs maximum qui représentent ton activité</li>
+                    <li>✍️ Police : utilise une police moderne et lisible (pas trop fantaisie)</li>
+                    <li>📐 Simplicité : moins c'est plus — un design épuré est toujours plus pro</li>
+                    <li>📱 Adapté au mobile : vérifie que ça se lit bien sur un petit écran</li>
+                    <li>🔄 Cohérence : utilise les mêmes couleurs et style partout (WhatsApp, Insta, Facebook...)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SERVICE 3 : COMMENT BOOSTER SA CONNEXION -->
+        <div class="section-page" id="booster">
+            <button class="btn btn-back" onclick="showPage('accueil')">← Retour à l'accueil</button>
+            <h2 style="color:#00ffff; text-align:center; margin:20px 0;">COMMENT BOOSTER SA CONNEXION 🚀</h2>
+            <p style="text-align:center;">Voici un guide complet pour booster ta connexion avec les VPN et outils de tunneling 👇🚀</p>
+
+            <div class="message-card">
+                <h3>📡 COMPRENDRE LE PRINCIPE :</h3>
+                <p>Ces outils (HTTP Injector, SSC Custom, HA Tunnel, etc.) utilisent des "bugs" ou des configurations spéciales pour se connecter à internet via les serveurs de ton opérateur. Ils créent un tunnel VPN qui peut te donner un accès internet gratuit ou plus rapide selon ta région 🌐</p>
+            </div>
+
+            <div class="message-card">
+                <h3>🔧 LES OUTILS PRINCIPAUX :</h3>
+
+                <h4>1. HTTP Injector 💉</h4>
+                <ul>
+                    <li>Télécharge depuis le Play Store</li>
+                    <li>Il te faut un fichier .ehi (configuration)</li>
+                    <li>Importe le fichier, appuie sur Connecter</li>
+                    <li>Conseil : cherche des fichiers .ehi récents pour ton opérateur et ton pays, les anciens expirent vite ⏰</li>
+                </ul>
+
+                <h4>2. SSC Custom (SSH Custom) 🔐</h4>
+                <ul>
+                    <li>Télécharge HA Tunnel Plus ou SSH Custom</li>
+                    <li>Utilise un compte SSH (serveur + identifiants)</li>
+                    <li>Configure le payload (en-tête HTTP) adapté à ton opérateur</li>
+                    <li>Conseil : les comptes SSH gratuits durent souvent 3-7 jours, renouvelle-les régulièrement 🔄</li>
+                </ul>
+
+                <h4>3. HA Tunnel Plus 🛡️</h4>
+                <ul>
+                    <li>Télécharge depuis le Play Store</li>
+                    <li>Importe un fichier .hat (configuration)</li>
+                    <li>Appuie sur Connecter</li>
+                    <li>Conseil : c'est le plus simple à utiliser pour les débutants 👍</li>
+                </ul>
+
+                <h4>4. NapsternetV / V2Ray 🌀</h4>
+                <ul>
+                    <li>Plus avancé, utilise le protocole V2Ray/Vmess</li>
+                    <li>Importe un fichier de config ou un lien vmess://</li>
+                    <li>Conseil : plus stable et rapide que SSH pour certains opérateurs ⚡</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>⚙️ COMMENT CONFIGURER (étapes générales) :</h3>
+
+                <h4>1. Trouve le "bug host" de ton opérateur 🔍</h4>
+                <ul>
+                    <li>C'est une URL ou IP que ton opérateur ne bloque pas</li>
+                    <li>Exemples courants : 0.gone.com, play.google.com, etc.</li>
+                    <li>Conseil : teste plusieurs bugs, certains marchent mieux la nuit 🌙</li>
+                </ul>
+
+                <h4>2. Crée ou trouve un compte SSH 🖥️</h4>
+                <ul>
+                    <li>Sites gratuits : fastssh.com, sshkit.com, bestvpnssh.com</li>
+                    <li>Choisis un serveur proche de ton pays pour plus de vitesse</li>
+                    <li>Conseil : les serveurs Singapore et Europe sont souvent rapides 🏎️</li>
+                </ul>
+
+                <h4>3. Configure le Payload (en-tête HTTP) 📝</h4>
+                <ul>
+                    <li>Exemple classique : GET / HTTP/1.1[crlf]Host: [host][crlf][crlf]</li>
+                    <li>Ou : CONNECT [host_port] HTTP/1.1[crlf]Host: [host][crlf][crlf]</li>
+                    <li>Conseil : le bon payload dépend de ton opérateur, teste les deux types 🧪</li>
+                </ul>
+
+                <h4>4. Connecte-toi et teste 📶</h4>
+                <ul>
+                    <li>Si ça connecte mais c'est lent, change de serveur</li>
+                    <li>Si ça ne connecte pas, change le bug host ou le payload</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🚀 ASTUCES POUR UNE MEILLEURE VITESSE :</h3>
+                <ul>
+                    <li>📍 Choisis un serveur SSH proche de toi géographiquement</li>
+                    <li>🔋 Ferme les applis en arrière-plan qui consomment des données</li>
+                    <li>📶 Préfère le réseau 4G au 3G si possible</li>
+                    <li>🕐 Connecte-toi aux heures creuses (tôt le matin ou tard le soir)</li>
+                    <li>🔄 Si c'est lent, déconnecte et reconnecte pour changer de route</li>
+                    <li>💡 Utilise le mode "DNS only" si disponible, parfois c'est plus rapide</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>⚠️ ATTENTION :</h3>
+                <ul>
+                    <li>🚫 Ces méthodes peuvent violer les conditions d'utilisation de ton opérateur</li>
+                    <li>📵 Ton opérateur peut bloquer ces méthodes à tout moment</li>
+                    <li>🔒 Ne partage jamais tes fichiers de config avec des inconnus (risque de piratage)</li>
+                    <li>Conseil : utilise toujours un antivirus et ne télécharge les applis que depuis des sources fiables ✅</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SERVICE 4 : COMMENT FAIRE DU CYBERSÉCURITÉ -->
+        <div class="section-page" id="cybersecurite">
+            <button class="btn btn-back" onclick="showPage('accueil')">← Retour à l'accueil</button>
+            <h2 style="color:#00ffff; text-align:center; margin:20px 0;">COMMENT FAIRE DU CYBERSÉCURITÉ 🛡️</h2>
+            <p style="text-align:center;">Voici un guide complet sur la Cybersécurité pour toi 👇🛡️</p>
+
+            <div class="message-card">
+                <h3>🔐 QU'EST-CE QUE LA CYBERSÉCURITÉ ?</h3>
+                <p>C'est l'art de protéger les systèmes informatiques, les réseaux et les données contre les attaques, les vols et les dommages. C'est un domaine très demandé et bien payé 💰</p>
+                <p>Conseil : c'est un métier d'avenir, commence à apprendre maintenant et tu seras en avance sur beaucoup de monde 🚀</p>
+            </div>
+
+            <div class="message-card">
+                <h3>📚 LES BASES À APPRENDRE EN PREMIER :</h3>
+
+                <h4>1. Les Réseaux (Networking) 🌐</h4>
+                <ul>
+                    <li>Comprends comment fonctionne internet (IP, DNS, TCP/UDP, HTTP/HTTPS)</li>
+                    <li>Apprends les bases du modèle OSI</li>
+                    <li>Outils : Wireshark (analyse le trafic réseau)</li>
+                    <li>Conseil : sans comprendre les réseaux, tu ne pourras pas avancer en cybersécurité 🧠</li>
+                </ul>
+
+                <h4>2. Linux 🐧</h4>
+                <ul>
+                    <li>La majorité des outils de cybersécurité tournent sur Linux</li>
+                    <li>Installe Kali Linux ou Parrot OS (systèmes spécialisés en sécurité)</li>
+                    <li>Apprends les commandes de base du terminal</li>
+                    <li>Conseil : utilise Termux sur ton téléphone Android pour t'entraîner aux commandes Linux 📱</li>
+                </ul>
+
+                <h4>3. Programmation 💻</h4>
+                <ul>
+                    <li>Python : le langage n°1 en cybersécurité (scripts, automatisation, hacking)</li>
+                    <li>Bash : pour les scripts Linux</li>
+                    <li>HTML/CSS/JavaScript : pour comprendre les failles web</li>
+                    <li>Conseil : commence par Python, c'est le plus facile et le plus utile 🐍</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🎯 LES DOMAINES DE LA CYBERSÉCURITÉ :</h3>
+
+                <h4>1. Pentesting (Test de pénétration) 🕵️</h4>
+                <ul>
+                    <li>Tu testes la sécurité des systèmes en essayant de les pirater (légalement)</li>
+                    <li>Outils : Nmap, Metasploit, Burp Suite</li>
+                    <li>Conseil : entraîne-toi sur des plateformes légales comme TryHackMe et HackTheBox 🎮</li>
+                </ul>
+
+                <h4>2. Bug Bounty 🐛💰</h4>
+                <ul>
+                    <li>Tu cherches des failles sur des sites web et tu es payé pour les signaler</li>
+                    <li>Plateformes : HackerOne, Bugcrowd, Intigriti</li>
+                    <li>Conseil : commence par les failles XSS et IDOR, ce sont les plus courantes pour débuter 🎯</li>
+                </ul>
+
+                <h4>3. Sécurité des réseaux 📡</h4>
+                <ul>
+                    <li>Protéger les réseaux d'entreprise contre les intrusions</li>
+                    <li>Outils : pare-feu, IDS/IPS, VPN</li>
+                    <li>Conseil : passe la certification CompTIA Network+ pour valider tes compétences 📜</li>
+                </ul>
+
+                <h4>4. Forensic (Investigation numérique) 🔍</h4>
+                <ul>
+                    <li>Analyser les preuves après une attaque</li>
+                    <li>Récupérer des données supprimées</li>
+                    <li>Conseil : c'est un domaine passionnant si tu aimes jouer au détective 🕵️‍♂️</li>
+                </ul>
+
+                <h4>5. Ingénierie sociale 🎭</h4>
+                <ul>
+                    <li>Comprendre comment les hackers manipulent les gens</li>
+                    <li>Phishing, prétexting, baiting...</li>
+                    <li>Conseil : la meilleure défense c'est l'éducation — apprends à reconnaître les arnaques 🧠</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🛠️ OUTILS ESSENTIELS À CONNAÎTRE :</h3>
+                <ul>
+                    <li>🔍 Nmap — scanner les ports et réseaux</li>
+                    <li>💉 Metasploit — framework d'exploitation</li>
+                    <li>🌐 Burp Suite — tester la sécurité des sites web</li>
+                    <li>📡 Wireshark — analyser le trafic réseau</li>
+                    <li>🔑 John the Ripper / Hashcat — cracker les mots de passe</li>
+                    <li>🐧 Kali Linux — système avec tous les outils préinstallés</li>
+                    <li>📱 Termux — terminal Linux sur Android</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>📱 COMMENCER DEPUIS TON TÉLÉPHONE :</h3>
+                <ul>
+                    <li>1. Installe Termux (depuis F-Droid, pas Play Store) 📲</li>
+                    <li>2. Tape : pkg update && pkg upgrade</li>
+                    <li>3. Installe Python : pkg install python</li>
+                    <li>4. Installe Nmap : pkg install nmap</li>
+                    <li>5. Installe Git : pkg install git</li>
+                    <li>Conseil : Termux est très puissant, tu peux faire beaucoup de choses directement depuis ton téléphone 💪</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🎓 OÙ APPRENDRE GRATUITEMENT :</h3>
+                <ul>
+                    <li>📺 YouTube : NetworkChuck, John Hammond, Hafnium (français)</li>
+                    <li>🎮 TryHackMe.com — exercices pratiques guidés (parfait pour débuter)</li>
+                    <li>🎮 HackTheBox.com — challenges plus avancés</li>
+                    <li>📖 Cours gratuits : Cisco Networking Academy, OpenClassrooms</li>
+                    <li>Conseil : fais 1 heure par jour minimum, la régularité c'est la clé 🔑</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>⚠️ RÈGLES IMPORTANTES :</h3>
+                <ul>
+                    <li>🚫 Ne pirate JAMAIS un système sans autorisation — c'est illégal et tu risques la prison</li>
+                    <li>✅ Entraîne-toi uniquement sur des plateformes légales (TryHackMe, HackTheBox, tes propres machines)</li>
+                    <li>📜 Respecte toujours la loi de ton pays</li>
+                    <li>🤝 Utilise tes compétences pour protéger, pas pour nuire</li>
+                    <li>Conseil : un hacker éthique (White Hat) gagne très bien sa vie tout en restant dans la légalité 💼✨</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SERVICE 5 : COMMENT DÉPLOYER DES BOT -->
+        <div class="section-page" id="deployer-bot">
+            <button class="btn btn-back" onclick="showPage('accueil')">← Retour à l'accueil</button>
+            <h2 style="color:#00ffff; text-align:center; margin:20px 0;">COMMENT DÉPLOYER DES BOT 🤖</h2>
+            <p style="text-align:center;">Voici comment déployer un bot sur Termux 👇🤖📱</p>
+
+            <div class="message-card">
+                <h3>🛠️ PRÉREQUIS À INSTALLER :</h3>
+                <p>Ouvre Termux et tape ces commandes :</p>
+                <div class="code-block">pkg update && pkg upgrade
+pkg install python
+pkg install git
+pip install pyTelegramBotAPI</div>
+                <p>Conseil : fais toujours update et upgrade avant d'installer quoi que ce soit pour éviter les erreurs ✅</p>
+            </div>
+
+            <div class="message-card">
+                <h3>📌 ÉTAPE 1 : CRÉER TON BOT</h3>
+                <p>Pour Telegram :</p>
+                <ul>
+                    <li>1. Ouvre Telegram et cherche @BotFather 🤖</li>
+                    <li>2. Envoie /newbot</li>
+                    <li>3. Donne un nom à ton bot</li>
+                    <li>4. Donne un username (doit finir par "bot")</li>
+                    <li>5. BotFather te donne un TOKEN — copie-le précieusement 🔑</li>
+                    <li>Conseil : ne partage jamais ton token avec personne, c'est la clé de ton bot 🔐</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>📌 ÉTAPE 2 : ÉCRIRE LE CODE DU BOT</h3>
+                <p>Dans Termux, crée un fichier :</p>
+                <div class="code-block">nano bot.py</div>
+                <p>Puis colle ce code basique :</p>
+                <div class="code-block">import telebot
+
+TOKEN = "TON_TOKEN_ICI"
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.reply_to(message, "Salut ! Je suis ton bot 🤖")
+
+@bot.message_handler(func=lambda message: True)
+def echo(message):
+    bot.reply_to(message, "Tu as dit : " + message.text)
+
+bot.polling()</div>
+                <p>Conseil : remplace "TON_TOKEN_ICI" par le token que BotFather t'a donné 📝</p>
+            </div>
+
+            <div class="message-card">
+                <h3>📌 ÉTAPE 3 : LANCER LE BOT</h3>
+                <div class="code-block">python bot.py</div>
+                <p>Ton bot est maintenant en ligne ! Va sur Telegram et envoie-lui un message 🎉</p>
+                <p>Conseil : ne ferme pas Termux sinon le bot s'arrête ⚠️</p>
+            </div>
+
+            <div class="message-card">
+                <h3>📌 ÉTAPE 4 : GARDER LE BOT ACTIF 24/7</h3>
+
+                <h4>Option 1 — Avec tmux (dans Termux) :</h4>
+                <div class="code-block">pkg install tmux
+tmux new -s monbot
+python bot.py</div>
+                <p>(Puis appuie sur Ctrl+B puis D pour détacher)</p>
+                <p>Conseil : ton bot continue même si tu fermes Termux 💪</p>
+
+                <h4>Option 2 — Avec nohup :</h4>
+                <div class="code-block">nohup python bot.py &</div>
+                <p>Conseil : plus simple mais moins stable que tmux 🔄</p>
+
+                <h4>Option 3 — Hébergement gratuit en ligne :</h4>
+                <ul>
+                    <li>Replit.com (gratuit)</li>
+                    <li>Railway.app (gratuit)</li>
+                    <li>Render.com (gratuit)</li>
+                    <li>Conseil : si tu veux un bot 24/7 sans garder ton téléphone allumé, utilise un hébergeur en ligne 🌐</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>🎯 TYPES DE BOTS QUE TU PEUX CRÉER :</h3>
+                <ul>
+                    <li>🤖 Bot Telegram — répondre aux messages, envoyer des infos</li>
+                    <li>💬 Bot WhatsApp — avec la librairie "whatsapp-web.js" (plus complexe)</li>
+                    <li>🎵 Bot Discord — avec discord.py</li>
+                    <li>📊 Bot de trading — surveiller les prix crypto</li>
+                    <li>Conseil : commence par un bot Telegram, c'est le plus simple pour débuter 🏁</li>
+                </ul>
+            </div>
+
+            <div class="message-card">
+                <h3>⚠️ PROBLÈMES COURANTS :</h3>
+                <ul>
+                    <li>❌ "Module not found" → pip install nom_du_module</li>
+                    <li>❌ Bot ne répond pas → vérifie ton token et ta connexion internet</li>
+                    <li>❌ Termux se ferme → utilise tmux ou un hébergeur en ligne</li>
+                    <li>Conseil : lis toujours le message d'erreur en entier, la solution est souvent dedans 🧐</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>BOUFON-TECH - 0 - GUIDE OFFICIEL - 2026</p>
+    </footer>
+
+    <script>
+        function toggleInscription() {
+            var form = document.getElementById('formInscription');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function validerInscription() {
+            var contact = document.getElementById('inputContact').value;
+            alert('✅ Inscription réussie avec : ' + contact);
+            document.getElementById('formInscription').style.display = 'none';
+        }
+
+        function showPage(pageId) {
+            var pages = document.querySelectorAll('.section-page');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
